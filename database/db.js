@@ -45,7 +45,7 @@ const saveDescriptions = (descriptionData) => {
 const findDescription = function(id) {
   return Description.findOne({songId: id})
     .catch((error) => {
-      console.log('Error finding song description in db: ', error);
+      console.log('DB Error finding song description: ', error);
     });
 };
 
@@ -54,8 +54,17 @@ const findDescription = function(id) {
 const deleteDescriptions = function() {
   return Description.deleteMany({})
     .catch((error) => {
-      console.log('Error delete song descriptions in database: ', error);
+      console.log('DB Error deleting all song descriptions: ', error);
     });
+};
+
+// ---------- UPDATE DESCRIPTIONS ---------- //
+
+const updateDescription = function(id, val) {
+  return Description.updateOne({songId: id}, {description: val})
+    .catch((err) => {
+      console.log(`DB Error updating song description: ${err}`);
+    })
 };
 
 // --------------- EXPORTS ----------------- //
@@ -63,3 +72,4 @@ const deleteDescriptions = function() {
 module.exports.saveDescriptions = saveDescriptions;
 module.exports.findDescription = findDescription;
 module.exports.deleteDescriptions = deleteDescriptions;
+module.exports.updateDescription = updateDescription;
