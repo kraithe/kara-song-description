@@ -19,7 +19,23 @@
 
 ## Usage
 
-> Some usage instructions
+> Routes:
+
+> GET -
+> ex.
+> Result:
+
+> POST -
+> ex.
+> Result:
+
+> UPDATE -
+> ex.
+> Result
+
+> DELETE -
+> ex.
+> Result
 
 ## Requirements
 

@@ -46,6 +46,10 @@ app.get('/songDescription/:songId', async(req, res) => {
   }
 });
 
+// app.post - save a new songId (descriptions)
+// app.put - update description based on songId
+// app.delete - delete based on songId
+
 app.get('/:current', (req, res) => {
   res.sendFile(path.join(__dirname, '../client/index.html'));
 });

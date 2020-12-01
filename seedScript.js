@@ -1,6 +1,9 @@
 const database = require('./database/db.js');
 const bands = require('./bandNames.js');
 const studios = require('./studioNames.js');
+// chunking records to upload - 500? 1000?
+// then insert chunk
+// next deadline - just upload efficiently
 
 const seedDatabase = async() => {
   var deleted = await database.deleteDescriptions();
