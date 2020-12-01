@@ -37,18 +37,75 @@ app.get('/songDescription/:songId', async(req, res) => {
       success: true,
       data: description
     });
-  } catch (error) {
-    console.error(error);
+  } catch(err) {
+    console.error(err);
     res.status(400).json({
       success: false,
-      msg: error
+      msg: err
     });
   }
 });
 
-// app.post - save a new songId (descriptions)
-// app.put - update description based on songId
-// app.delete - delete based on songId
+app.post('/songDescription', async(req, res) => {
+  try {
+    const description = req.params;
+    const result = await db.saveDescriptions(description);
+    res.status(200).send({
+      success: true,
+      data: result
+    });
+  } catch(err) {
+    console.error(err);
+    res.status(400).json({
+      success: false,
+      msg: err
+    });
+  }
+});
+
+app.put('/songDescription:songId', async(req, res) => {
+  try {
+    const description = await db.updateDescription(req.params.songId, req.params.description);
+    if (!description) {
+      return res.status(400).json({
+        success: false,
+        msg: `No description exists to be updated for songId: ${req.params.songId}`
+      });
+    }
+    res.status(200).send({
+      success: true,
+      data: description
+    });
+  } catch(err) {
+    console.error(err);
+    res.status(400).json({
+      success: false,
+      msg: err
+    });
+  }
+});
+
+app.delete('/songDescription:songId', async(req, res) => {
+  try {
+    const description = await db.deleteDescription(req.params.songId);
+    if (!description) {
+      return res.status(400).json({
+        success: false,
+        msg: `No description exists to delete for songId: ${req.params.songId}`
+      });
+    }
+    res.status(200).send({
+      success: true,
+      data: description
+    });
+  } catch(err) {
+    console.error(err);
+    res.status(400).json({
+      success: false,
+      msg: err
+    });
+  }
+});
 
 app.get('/:current', (req, res) => {
   res.sendFile(path.join(__dirname, '../client/index.html'));
