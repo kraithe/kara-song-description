@@ -13,6 +13,11 @@ db.once('open', function() {
   console.log('Connected to MongoDB!');
 });
 
+const dropDb = async() => {
+  await db.dropDatabase();
+  console.log(`Dropped Song Description database successfully.`);
+};
+
 // ------------- DB SCHEMA ------------ //
 
 const infoSchema = new mongoose.Schema({
@@ -49,12 +54,11 @@ const findDescription = function(id) {
     });
 };
 
-// ---------- DELETE DESCRIPTIONS --------- //
-
-const deleteDescriptions = function() {
-  return Description.deleteMany({})
+// ----- DELETE ONE SET OF ITEM DESCRIPTIONS ----- //
+const deleteDescription = function(id) {
+  return Description.deleteOne({songId: id})
     .catch((error) => {
-      console.log('DB Error deleting all song descriptions: ', error);
+      console.log('DB Error deleting song description: ', error);
     });
 };
 
@@ -67,9 +71,12 @@ const updateDescription = function(id, val) {
     })
 };
 
+
 // --------------- EXPORTS ----------------- //
 
 module.exports.saveDescriptions = saveDescriptions;
 module.exports.findDescription = findDescription;
 module.exports.deleteDescriptions = deleteDescriptions;
+module.exports.deleteDescription = deleteDescription;
 module.exports.updateDescription = updateDescription;
+module.exports.dropDb = dropDb;
