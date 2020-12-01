@@ -23,14 +23,22 @@ const dropDb = async() => {
 const infoSchema = new mongoose.Schema({
   songId: {
     type: Number,
-    unique: true
+    unique: true,
+    required: true
   },
   bandId: {
     type: Number,
-    unique: true
+    unique: true,
+    required: true
   },
-  bandName: String,
-  description: String
+  bandName: {
+    type: String,
+    required: true
+  },
+  description: {
+    type: String,
+    required: true
+  }
 });
 
 const Description = mongoose.model('Description', infoSchema);
