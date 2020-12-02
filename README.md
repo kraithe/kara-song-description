@@ -21,21 +21,17 @@
 
 > Routes:
 
-> GET -
-> ex.
-> Result:
+> GET - '/songDescription/:songId'
+> Returns a JSON object with all Descriptions data for the given songId
 
-> POST -
-> ex.
-> Result:
+> POST - '/songDescription'
+> Adds a new description to the database, returning a log of the data added
 
-> UPDATE -
-> ex.
-> Result
+> UPDATE - '/songDescription/:songId'
+> Updates the .description property to use the user-provided req.params.description, returning a log of the modified data
 
-> DELETE -
-> ex.
-> Result
+> DELETE - '/songDescription/:songId'
+> Deletes the entire entry of the given songId, returning the data deleted.
 
 ## Requirements
 
