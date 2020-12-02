@@ -53,6 +53,15 @@ const saveDescriptions = (descriptionData) => {
     });
 };
 
+// --------- SAVE BATCH DESCRIPTIONS ------ //
+
+const saveBatch = (items) => {
+  return Description.insertMany(items)
+    .catch((err) => {
+      console.log(`Error inserting a batch: ${err}`);
+    });
+};
+
 // --------- FIND SONG DESCRIPTION -------- //
 
 const findDescription = function(id) {
@@ -82,8 +91,9 @@ const updateDescription = function(id, val) {
 
 // --------------- EXPORTS ----------------- //
 
-module.exports.saveDescriptions = saveDescriptions;
 module.exports.findDescription = findDescription;
+module.exports.saveDescriptions = saveDescriptions;
+module.exports.saveBatch = saveBatch;
 module.exports.deleteDescription = deleteDescription;
 module.exports.updateDescription = updateDescription;
 module.exports.dropDb = dropDb;

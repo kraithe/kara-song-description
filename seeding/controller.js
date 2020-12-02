@@ -5,7 +5,7 @@ async function batchSeed(batches, batchSize) {
   for (let i = 0; i < batches; i++) {
     let newBatch = maker.makeBatch(batchSize);
     await newBatch
-      .save()
+      db.saveBatch(newBatch)
       .then(success => {
         console.log(`Batch ${i} done.`);
       })
