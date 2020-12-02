@@ -23,7 +23,7 @@ let makeEntry = (id) => {
 
 let makeBatch = (size) => {
   let result = [];
-  for (var i = 1; i <= recordCount; i++) {
+  for (var i = 1; i <= size; i++) {
     let entry = makeEntry(i);
     result.push(entry);
   }
