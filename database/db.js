@@ -84,7 +84,6 @@ const updateDescription = function(id, val) {
 
 module.exports.saveDescriptions = saveDescriptions;
 module.exports.findDescription = findDescription;
-module.exports.deleteDescriptions = deleteDescriptions;
 module.exports.deleteDescription = deleteDescription;
 module.exports.updateDescription = updateDescription;
 module.exports.dropDb = dropDb;
