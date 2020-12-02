@@ -15,7 +15,7 @@ let makeEntry = (id) => {
   let newEntry = {
     songId: id,
     bandId: Math.floor(Math.random() * 100),
-    baneName: lorem.generateWords(Math.floor(Math.random() * 5)),
+    bandName: lorem.generateWords(Math.floor(Math.random() * 5)),
     description: lorem.generateParagraphs(1);
   };
   return newEntry;
