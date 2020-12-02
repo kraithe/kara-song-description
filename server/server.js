@@ -63,7 +63,7 @@ app.post('/songDescription', async(req, res) => {
   }
 });
 
-app.put('/songDescription:songId', async(req, res) => {
+app.put('/songDescription/:songId', async(req, res) => {
   try {
     const description = await db.updateDescription(req.params.songId, req.params.description);
     if (!description) {
@@ -85,7 +85,7 @@ app.put('/songDescription:songId', async(req, res) => {
   }
 });
 
-app.delete('/songDescription:songId', async(req, res) => {
+app.delete('/songDescription/:songId', async(req, res) => {
   try {
     const description = await db.deleteDescription(req.params.songId);
     if (!description) {
