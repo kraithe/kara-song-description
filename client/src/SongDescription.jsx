@@ -26,8 +26,12 @@ class SongDescription extends React.Component {
     let songId = splitUrl.filter(function(id) {
       return parseInt(id);
     });
+    // This is giving <!DOCTYPE ...> on load
+    // let handleDefaultSongId = (typeof songId === "number") ? songId : ["123"];
+    let songIdWithDefault = (songId > 0) ? songId : ["123"];
     console.log('Song ID: ', songId);
-    axios.get(`/songDescription/${songId}`)
+    console.log('Song ID with optional Default: ', songIdWithDefault);
+    axios.get(`/songDescription/${songIdWithDefault}`)
       .then((response) => {
         console.log('Data: ', response.data.data);
         this.updateDescription(response.data.data);
