@@ -81,7 +81,7 @@ const deleteDescription = function(id) {
 
 // ---------- UPDATE DESCRIPTIONS ---------- //
 
-const updateDescription = function(id, val) {
+const updateDescription = function(id = 1, val) {
   return Description.updateOne({songId: id}, {description: val})
     .catch((err) => {
       console.log(`DB Error updating song description: ${err}`);

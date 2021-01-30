@@ -24,6 +24,11 @@ app.use('/', expressStaticGzip(path.join(__dirname, '../client'), {
   }
 }));
 
+app.get('/loaderio-c443a15423d233e72430ab682a5adfd0.txt', (req, res) => {
+  const loaderKey = "loaderio-c443a15423d233e72430ab682a5adfd0";
+  res.send(loaderKey);
+});
+
 app.get('/songDescription/:songId', async(req, res) => {
   try {
     const description = await db.findDescription(req.params.songId);
