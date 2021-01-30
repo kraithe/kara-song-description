@@ -1,7 +1,7 @@
 // ----------- DB CONNECTION ---------- //
 
 const mongoose = require('mongoose');
-mongoose.connect('mongodb://localhost/descriptions', {
+mongoose.connect('mongodb://3.17.27.20/descriptions', {
   useNewUrlParser: true,
   useUnifiedTopology: true,
   useCreateIndex: true
