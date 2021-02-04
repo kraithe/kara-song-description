@@ -1,7 +1,8 @@
 // ----------- DB CONNECTION ---------- //
 
 const mongoose = require('mongoose');
-mongoose.connect('mongodb://3.17.27.20/descriptions', {
+  mongoose.connect('mongodb://3.17.27.20/descriptions', {
+  // mongoose.connect('mongodb://localhost/descriptions', {
   useNewUrlParser: true,
   useUnifiedTopology: true,
   useCreateIndex: true
@@ -42,6 +43,7 @@ const infoSchema = new mongoose.Schema({
 });
 
 const Description = mongoose.model('Description', infoSchema);
+const testDescription = mongoose.model('testDescription', infoSchema);
 
 // -------- SAVE DESCRIPTION FUNC -------- //
 

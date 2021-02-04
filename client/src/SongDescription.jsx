@@ -22,7 +22,7 @@ class SongDescription extends React.Component {
   }
 
   getIdAndUpdateDOM() {
-    let splitUrl = window.location.pathname.split('/');
+    let splitUrl = window.location.pathname.split('/')[1];
     let songId = splitUrl.filter(function(id) {
       return parseInt(id);
     });
