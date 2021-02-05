@@ -15,7 +15,6 @@ app.use(cors());
 app.get('/bundle.js', cors(), (req, res) => {
   res.sendFile(path.join(__dirname, '../client/bundle.js'));
 });
-app.use('/:songId', express.static(path.join(__dirname, '../client')));
 
 app.use('/', expressStaticGzip(path.join(__dirname, '../client'), {
   enableBrotli: true,
@@ -25,10 +24,12 @@ app.use('/', expressStaticGzip(path.join(__dirname, '../client'), {
   }
 }));
 
-app.get('/loaderio-c443a15423d233e72430ab682a5adfd0.txt', (req, res) => {
-  const loaderKey = "loaderio-c443a15423d233e72430ab682a5adfd0";
-  res.send(loaderKey);
+app.get('/loaderio-c443a15423d233e72430ab682a5adfd0', (req, res) => {
+  res.sendFile(path.join(__dirname, '../client/loaderio-c443a15423d233e72430ab682a5adfd0.txt'));
+  console.log('File ostensibly sent to loaderio!');
 });
+
+app.use('/:songId', express.static(path.join(__dirname, '../client')));
 
 app.get('/songDescription/:songId', async(req, res) => {
   try {
@@ -113,9 +114,11 @@ app.delete('/songDescription/:songId', async(req, res) => {
   }
 });
 
-app.get('/:current', (req, res) => {
-  res.sendFile(path.join(__dirname, '../client/index.html'));
-});
+// app.get('/:current', (req, res) => {
+//   if (!req.params.current.includes('loaderio')) {
+//     res.sendFile(path.join(__dirname, '../client/index.html'));
+//   }
+// });
 
 app.listen(port, () => {
   console.log(chalk.magenta(`Server running on port at http://localhost:${port}`));

@@ -22,23 +22,34 @@ class SongDescription extends React.Component {
   }
 
   getIdAndUpdateDOM() {
-    let splitUrl = window.location.pathname.split('/')[1];
-    let songId = splitUrl.filter(function(id) {
-      return parseInt(id);
-    });
+    let songId = window.location.pathname.split('/')[1];
+    console.log(songId);
+    if (songId.includes('loaderio')) {
+      axios.get(`/loaderio-c443a15423d233e72430ab682a5adfd0`)
+        .then((response) => {
+          console.log('Sending file to loaderIo');
+        })
+        .catch((err) => {
+          console.log('Error sending file to loaderIo');
+        })
+    } else {
+      let songIdWithDefault = (songId > 0) ? songId : ["123"];
+      console.log('Song ID: ', songId);
+      console.log('Song ID with optional Default: ', songIdWithDefault);
+      axios.get(`/songDescription/${songIdWithDefault}`)
+        .then((response) => {
+          console.log('Data: ', response.data.data);
+          this.updateDescription(response.data.data);
+        })
+        .catch((error) => {
+          console.log('Error rendering initial song description: ', error);
+        });
+    }
+    // let songId = splitUrl.filter(function(id) {
+    //   return parseInt(id);
+    // });
     // This is giving <!DOCTYPE ...> on load
     // let handleDefaultSongId = (typeof songId === "number") ? songId : ["123"];
-    let songIdWithDefault = (songId > 0) ? songId : ["123"];
-    console.log('Song ID: ', songId);
-    console.log('Song ID with optional Default: ', songIdWithDefault);
-    axios.get(`/songDescription/${songIdWithDefault}`)
-      .then((response) => {
-        console.log('Data: ', response.data.data);
-        this.updateDescription(response.data.data);
-      })
-      .catch((error) => {
-        console.log('Error rendering initial song description: ', error);
-      });
   }
 
   componentDidMount() {
