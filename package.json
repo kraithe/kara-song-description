@@ -8,7 +8,7 @@
     "seedDB": "node seeding/seeder.js",
     "build": "webpack --mode=development -d --watch",
     "prod": "webpack --mode=production -d --watch",
-    "start": "node server/server.js",
+    "start": "nodemon server/server.js",
     "test": "jest"
   },
   "repository": {
@@ -31,6 +31,7 @@
     "express": "^4.17.1",
     "express-static-gzip": "^2.1.0",
     "favicons": "^6.2.0",
+    "loaderio": "0.0.3",
     "mongoose": "^5.10.11",
     "multistream": "^4.0.1",
     "newrelic": "^7.1.1",

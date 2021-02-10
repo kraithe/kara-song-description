@@ -1,13 +1,31 @@
 require('newrelic');
 const express = require('express');
-const app = express();
 const path = require('path');
+
+const redis = require('redis');
+
 const chalk = require('chalk');
 const bodyParser = require('body-parser');
 const db = require('../database/db.js');
 const cors = require('cors');
+
 const port = 2001;
+const redisPort = 6379;
+
+const client = redis.createClient(redisPort);
+const app = express();
 const expressStaticGzip = require('express-static-gzip');
+
+function cache(req, res, next) {
+  client.get(req.params.songId, (err, cacheData) => {
+    if (err) { console.log(err); }
+    if (cacheData !== null) {
+      res.send(id)
+    } else {
+      next();
+    }
+  })
+}
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: true}));
@@ -31,7 +49,7 @@ app.get('/loaderio-fdae82fdc78a185ad8c839f983e2fd91', (req, res) => {
 
 app.use('/:songId', express.static(path.join(__dirname, '../client')));
 
-app.get('/songDescription/:songId', async(req, res) => {
+app.get('/songDescription/:songId', cache, async(req, res) => {
   try {
     const description = await db.findDescription(req.params.songId);
     if (!description) {
@@ -40,6 +58,7 @@ app.get('/songDescription/:songId', async(req, res) => {
         msg: `No description for songId: ${req.params.songId}`
       });
     }
+    client.setex(description.songId, 3600, JSON.stringify(description));
     res.status(200).send({
       success: true,
       data: description
