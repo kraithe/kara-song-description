@@ -16,16 +16,6 @@ const client = redis.createClient(redisPort);
 const app = express();
 const expressStaticGzip = require('express-static-gzip');
 
-function cache(req, res, next) {
-  client.get(req.params.songId, (err, cacheData) => {
-    if (err) { console.log(err); }
-    if (cacheData !== null) {
-      res.send(cacheData)
-    } else {
-      next();
-    }
-  })
-}
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: true}));
@@ -48,6 +38,17 @@ app.get('/loaderio-fdae82fdc78a185ad8c839f983e2fd91', (req, res) => {
 });
 
 app.use('/:songId', express.static(path.join(__dirname, '../client')));
+
+function cache(req, res, next) {
+  client.get(req.params.songId, (err, cacheData) => {
+    if (err) { console.log(err); }
+    if (cacheData !== null) {
+      res.send(cacheData)
+    } else {
+      next();
+    }
+  })
+};
 
 app.get('/songDescription/:songId', cache, async(req, res) => {
   try {
