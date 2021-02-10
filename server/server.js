@@ -1,4 +1,4 @@
-require('newrelic');
+// require('newrelic');
 const express = require('express');
 const path = require('path');
 
@@ -20,7 +20,7 @@ function cache(req, res, next) {
   client.get(req.params.songId, (err, cacheData) => {
     if (err) { console.log(err); }
     if (cacheData !== null) {
-      res.send(id)
+      res.send(cacheData)
     } else {
       next();
     }
