@@ -31,8 +31,8 @@ app.use('/', expressStaticGzip(path.join(__dirname, '../client'), {
   }
 }));
 
-app.get('/loaderio-fdae82fdc78a185ad8c839f983e2fd91', (req, res) => {
-  res.sendFile(path.join(__dirname, '../client/loaderio-fdae82fdc78a185ad8c839f983e2fd91.txt'));
+app.get('/loaderio-a6b00d8a6c8f42be8e213b253b29f083', (req, res) => {
+  res.sendFile(path.join(__dirname, '../client/loaderio-a6b00d8a6c8f42be8e213b253b29f083.txt'));
   console.log('File ostensibly sent to loaderio!');
 });
 
